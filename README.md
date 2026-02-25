@@ -405,9 +405,8 @@ We are now back in our `build environment` after setting up our `live system` an
 2. Copy kernel images
 
    ```shell
-   cp /boot/vmlinuz-**-**-generic /image/casper/vmlinuz
-
-   cp /boot/initrd.img-**-**-generic /image/casper/initrd
+   cp /boot/vmlinuz-$(uname -r) /image/casper/vmlinuz
+   cp /boot/initrd.img-$(uname -r) /image/casper/initrd
    ```
 
 3. Copy memtest86+ binary (BIOS and UEFI)
@@ -481,7 +480,7 @@ remove packages specified in `filesystem.manifest` that are *not* listed in `fil
    ```shell
    dpkg-query -W --showformat='${Package} ${Version}\n' | sudo tee /image/casper/filesystem.manifest
 
-   cp -v /image/casper/filesystem.manifest image/casper/filesystem.manifest-desktop
+   cp -v /image/casper/filesystem.manifest /image/casper/filesystem.manifest-desktop
 
    sed -i '/ubiquity/d' /image/casper/filesystem.manifest-desktop
 
